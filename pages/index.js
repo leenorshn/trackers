@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import CarTile from "../components/CarTile";
+import Header from "../components/Header";
 
 const cars = [
   {
@@ -46,40 +48,18 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className=" bg-blue-600 w-full sticky top-0">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <img src="/logoo.png" className="w-16 h-16  object-center" alt="" />
-            <h2 className="text-2xl font-bold text-blue-50">Tracking cars</h2>
-          </div>
-          <div className=" flex items-center space-x-4 ">
-            <a
-              href=""
-              className="text-white hover:text-orange-600 hover:font-semibold hover:underline hover:underline-offset-4"
-            >
-              Acceuil
-            </a>
-            <a
-              href=""
-              className="text-white hover:text-orange-600 hover:font-semibold hover:underline hover:underline-offset-4"
-            >
-              Clients
-            </a>
-            <a
-              href=""
-              className="text-white hover:text-orange-600 hover:font-semibold hover:underline hover:underline-offset-4"
-            >
-              Services
-            </a>
-          </div>
-        </div>
-      </header>
-
       <main className="max-w-4xl mx-auto h-full p-8">
         <div>
-          <h2 className="text-3xl text-blue-600 font-semibold mb-4">
-            Liste des camions en tracking
-          </h2>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-3xl text-blue-600 font-semibold ">
+              Tracking cars list
+            </h2>
+            <Link href="/new_tracker">
+              <a className="text-white px-8 py-2 bg-blue-600 rounded-md">
+                New Tracker
+              </a>
+            </Link>
+          </div>
           <div className="space-y-2">
             {cars.map((car) => (
               <CarTile car={car} key={car.id} />
