@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TrashIcon } from "@heroicons/react/outline";
 
 const Header = () => {
   return (
@@ -14,6 +15,7 @@ const Header = () => {
               Acceuil
             </a>
           </Link>
+
           <Link href="/clients">
             <a className="text-white hover:text-orange-600 hover:font-semibold hover:underline hover:underline-offset-4">
               Clients

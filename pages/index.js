@@ -4,42 +4,7 @@ import Link from "next/link";
 import CarTile from "../components/CarTile";
 import Header from "../components/Header";
 
-const cars = [
-  {
-    id: 1,
-    name: "Actros 2822 54 ",
-    company: "Palos",
-    trafic: "Butembo-Nairobi",
-    status: "actif",
-    imgUrl: "/camion1.jpg",
-  },
-  {
-    id: 2,
-    name: "Mercedes Benz -- 2 tank ",
-    company: "Palos",
-    trafic: "Goma-Nairobi",
-    status: "actif",
-    imgUrl: "/camion2.jpg",
-  },
-  {
-    id: 3,
-    name: "Actros 224 ",
-    company: "Palos",
-    trafic: "Butembo-Nairobi",
-    status: "actif",
-    imgUrl: "/transitgood.jpg",
-  },
-  {
-    id: 4,
-    name: "Actros 225 ",
-    company: "Palos",
-    trafic: "Butembo-Nairobi",
-    status: "actif",
-    imgUrl: "/transitgood.jpg",
-  },
-];
-
-export default function Home() {
+export default function Home({ cars }) {
   return (
     <div className="bg-gray-200 min-h-screen w-full">
       <Head>
@@ -60,8 +25,10 @@ export default function Home() {
               </a>
             </Link>
           </div>
+          {cars.length}
           <div className="space-y-2">
             {cars.map((car) => (
+              //console.log(car)
               <CarTile car={car} key={car.id} />
             ))}
           </div>
@@ -69,4 +36,16 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const response = await fetch("http://localhost:5001/trackers");
+  const cars = await response.json();
+  console.log(cars);
+
+  return {
+    props: {
+      cars,
+    },
+  };
 }

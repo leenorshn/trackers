@@ -1,11 +1,27 @@
+import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
 
 const Newtracker = () => {
-  const [name, setName] = useState("");
+  const [engine, setEngine] = useState("");
   const [company, setCompany] = useState("");
   const [trafic, setTrafic] = useState("");
-  const [id, setId] = useState("");
+  const [image_url, setImageUrl] = useState("");
+
+  const saveData = async (e) => {
+    e.preventDefault();
+    const tracker = { company, engine, trafic, image_url };
+    await axios.post("http://localhost:5001/trackers", { ...tracker });
+    cancelFunc(e);
+  };
+
+  const cancelFunc = async (e) => {
+    e.preventDefault();
+    setCompany("");
+    setEngine("");
+    setTrafic("");
+    setImageUrl("");
+  };
   return (
     <div className="min-h-screen bg-gray-200">
       <div className="max-w-4xl mx-auto bg-white min-h-screen">
@@ -21,10 +37,10 @@ const Newtracker = () => {
           <div>
             <label htmlFor="cardName"></label>
             <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={engine}
+              onChange={(e) => setEngine(e.target.value)}
               type="text"
-              placeholder="Car name"
+              placeholder="Car Engine"
             />
           </div>
           <div>
@@ -48,17 +64,20 @@ const Newtracker = () => {
           <div>
             <label htmlFor="cardName"></label>
             <input
-              value={id}
-              onChange={(e) => setId(e.target.value)}
+              value={image_url}
+              onChange={(e) => setImageUrl(e.target.value)}
               type="text"
-              placeholder="Car id"
+              placeholder="Car image url"
             />
           </div>
           <div className="flex items-center mt-8 space-x-8 justify-end">
             <button className="px-9 py-2 rounded-md bg-orange-600 text-white">
               Cancel
             </button>
-            <button className="px-12 py-2 rounded-md bg-blue-600 text-white">
+            <button
+              onClick={(e) => saveData(e)}
+              className="px-12 py-2 rounded-md bg-blue-600 text-white"
+            >
               Save
             </button>
           </div>
