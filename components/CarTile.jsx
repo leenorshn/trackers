@@ -1,6 +1,10 @@
 import { TrashIcon } from "@heroicons/react/outline";
+import axios from "axios";
 
 const CarTile = ({ car }) => {
+  const deleteCar = (id) => {
+    await axios.delete(`http:localhost:5001/trackers/${id}`);
+  };
   return (
     <div className="px-3 py-2 rounded-md shadow bg-white ">
       <div className="flex items-center justify-between">
@@ -11,7 +15,10 @@ const CarTile = ({ car }) => {
             <p>{car.trafic}</p>
           </div>
         </div>
-        <TrashIcon className="h-7 w-6 text-orange-500" />
+        <TrashIcon
+          onClick={(e) => deleteCar(car.id)}
+          className="h-7 w-6 text-orange-500"
+        />
       </div>
     </div>
   );
