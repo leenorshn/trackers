@@ -3,24 +3,24 @@ import Link from "next/link";
 import { useState } from "react";
 
 const Newtracker = () => {
-  const [engine, setEngine] = useState("");
-  const [company, setCompany] = useState("");
-  const [trafic, setTrafic] = useState("");
+  const [imei, setImei] = useState("");
+  const [model, setModel] = useState("");
+  const [description, setDescription] = useState("");
   const [image_url, setImageUrl] = useState("");
 
   const saveData = async (e) => {
     e.preventDefault();
-    const tracker = { company, engine, trafic, image_url };
+    const tracker = { imei, model, description };
     await axios.post("http://localhost:5001/trackers", { ...tracker });
     cancelFunc(e);
   };
 
   const cancelFunc = async (e) => {
     e.preventDefault();
-    setCompany("");
-    setEngine("");
-    setTrafic("");
-    setImageUrl("");
+    setImei("");
+    setModel("");
+    setDescription("");
+    //setImageUrl("");
   };
   return (
     <div className="min-h-screen bg-gray-200">
@@ -37,39 +37,31 @@ const Newtracker = () => {
           <div>
             <label htmlFor="cardName"></label>
             <input
-              value={engine}
-              onChange={(e) => setEngine(e.target.value)}
+              value={imei}
+              onChange={(e) => setImei(e.target.value)}
               type="text"
-              placeholder="Car Engine"
+              placeholder="Car imei"
             />
           </div>
           <div>
             <label htmlFor="cardName"></label>
             <input
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
               type="text"
-              placeholder="Company"
+              placeholder="model"
             />
           </div>
           <div>
             <label htmlFor="cardName"></label>
             <input
-              value={trafic}
-              onChange={(e) => setTrafic(e.target.value)}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               type="text"
               placeholder="Trafic axe"
             />
           </div>
-          <div>
-            <label htmlFor="cardName"></label>
-            <input
-              value={image_url}
-              onChange={(e) => setImageUrl(e.target.value)}
-              type="text"
-              placeholder="Car image url"
-            />
-          </div>
+
           <div className="flex items-center mt-8 space-x-8 justify-end">
             <button className="px-9 py-2 rounded-md bg-orange-600 text-white">
               Cancel

@@ -29,7 +29,7 @@ export default function Home({ cars }) {
           <div className="space-y-2">
             {cars.map((car) => (
               //console.log(car)
-              <CarTile car={car} key={car.id} />
+              <CarTile car={car} key={car._id} />
             ))}
           </div>
         </div>
